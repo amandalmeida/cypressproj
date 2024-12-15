@@ -1,34 +1,36 @@
 
+
 describe('Tela Cadastro', () => {
     it('Cadastra User Admin Sucesso', () => {
         criarUserAdm("Aureliano","lianoadm@gmail.com", "123");
-        criarUser("Arcadio", "arcadio@gmail.com", "123");
+        //criarUser("Arcadio", "arcadio@gmail.com", "123");
+        cy.get('#administrador').should('be.checked');
+
     });
 
     it('Use Email ja cadastrado', () => {
-        criarUserAdm("Aureliano","lianoadm@gmail.com", "123");
-        criarUser("Arcadio", "arcadio@gmail.com", "123");
+       
+        criarUser("Arcadio Jose", "arcadio@gmail.com", "123");
+        cy.get('.alert > :nth-child(2)').should('have.text','Este email já está sendo usado' );
     });
 
-    it('User ampo sem preencher', () => {
-        criarUserAdm("Aureliano","lianoadm@gmail.com", "123");
-        criarUser("Arcadio", "arcadio@gmail.com", "123");
-    });
-
-    it('User nome invalido', () => {
-        criarUserAdm("Aureliano","lianoadm@gmail.com", "123");
-        criarUser("Arcadio", "arcadio@gmail.com", "123");
+    it('User senha sem preencher', () => {
+        
+        cy.visit('https://front.serverest.dev/login');
+            
+        cy.contains("Cadastre-se").click();
+        cy.get('[data-testid="nome"]').type("Rebeca");
+        cy.get('[data-testid="email"]').type("rebeca@gmail.com");
+        cy.contains('button', 'Cadastrar').click();
+        cy.get('.alert > :nth-child(2)').should('have.text','Password é obrigatório');
     });
 
     it('User email invalido', () => {
-        criarUserAdm("Aureliano","lianoadm@gmail.com", "123");
-        criarUser("Arcadio", "arcadio@gmail.com", "123");
+        criarUserAdm("Ursula","ursula@aaa", "123");
+        cy.get('.alert > :nth-child(2)').should('have.text', 'Email deve ser um email válido');
     });
 
   });
-
-
-
 
 
 
