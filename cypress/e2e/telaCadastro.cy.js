@@ -2,10 +2,16 @@
 
 describe('Tela Cadastro', () => {
     it('Cadastra User Admin Sucesso', () => {
-        criarUserAdm("Aureliano","lianoadm@gmail.com", "123");
-        //criarUser("Arcadio", "arcadio@gmail.com", "123");
+        criarUserAdm("Aureleano","leanoadm@gmail.com", "123");
+       
         cy.get('#administrador').should('be.checked');
 
+    });
+
+    it('Cadastra User  Sucesso', () => {
+       
+        criarUser("Arcadio", "arcadio@gmail.com", "123");
+       
     });
 
     it('Use Email ja cadastrado', () => {
@@ -31,8 +37,6 @@ describe('Tela Cadastro', () => {
     });
 
   });
-
-
 
 
   
